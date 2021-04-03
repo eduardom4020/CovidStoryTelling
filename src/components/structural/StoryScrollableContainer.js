@@ -1,9 +1,9 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState } from 'react';
 
 export const StoryScrollableContainer = ({children}) => {
     const [ currentSlideIndex, setSlideIndex ] = useState(1);
     const containerRef = useRef();
-
+    
     const handleScroll = () => {
         if(containerRef.current) {
             const childrenDOM = [...containerRef.current.children];
@@ -21,10 +21,12 @@ export const StoryScrollableContainer = ({children}) => {
         }
     }, [])
     
+    const Children = !children.length ? [children] : children;
+
     return (
         <div ref={containerRef}>
-            {children.map((Child, index) => (
-                React.cloneElement(Child, { ...Child.props, active: currentSlideIndex === index + 1 })
+            {Children.map((child, index) => (
+                React.cloneElement(child, { ...child.props, active: currentSlideIndex === index + 1 })
             ))}
         </div>
     );
