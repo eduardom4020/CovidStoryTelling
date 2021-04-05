@@ -8,7 +8,8 @@ const dimensionsCache = {};
 
 export const getDimension = (resourceName, dimensionName) => {
     if(!crossfiltersCache.hasOwnProperty(resourceName)) {
-        const data = interceptData(Assets[resourceName]);
+        const rawData = Assets[resourceName];
+        const data = interceptData(resourceName, rawData);
         crossfiltersCache[resourceName] = crossfilter(data);
     }
 
