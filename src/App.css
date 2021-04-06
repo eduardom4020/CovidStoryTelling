@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+path.line {
+  fill: none;
+  /* stroke: green; */
+  stroke-width: 1.5px;
+}
