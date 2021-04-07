@@ -3,38 +3,13 @@ import * as dc from 'dc';
 import * as d3 from 'd3';
 import reductio from 'reductio';
 
-import { getDimension } from '../../providers/dimensionsProvider';
-import { registerDataInterceptor } from '../../providers/dataTreatmentInterceptor';
 import { RESOURCE_NAME_JHU_FULL_DATA } from '../../constants';
+import { useDimension } from '../../hooks/useDimension';
 
 export const Slide3 = ({active}) => {
-    const MOVING_AVERAGE_WINDOW = 7;
     const barchartRef = useRef();
 
-    const [ casesTimeDimension, setCasesTimeDimension ] = useState();
-
-    useEffect(async () => {
-        registerDataInterceptor(RESOURCE_NAME_JHU_FULL_DATA, data => {
-            const dateParser = d3.timeParse('%Y-%m-%d');
-            let lastNewDeaths = 0;
-
-            return data.map((d, index, array) => {
-                lastNewDeaths = d.new_deaths || lastNewDeaths;
-
-                return {
-                    ...d, 
-                    date: dateParser(d.date),
-                    new_deaths: lastNewDeaths,
-                    new_deaths_mov_avg: index >= MOVING_AVERAGE_WINDOW - 1 
-                    ? (array.slice(MOVING_AVERAGE_WINDOW - 1, index).map(d => +d.new_deaths).reduce((acc, curr) => acc + curr, 0) + lastNewDeaths) / MOVING_AVERAGE_WINDOW
-                    : lastNewDeaths
-                } 
-            });
-        })
-
-        const dimension = await getDimension(RESOURCE_NAME_JHU_FULL_DATA, 'date');
-        setCasesTimeDimension(dimension);
-    }, []);
+    const casesTimeDimension = useDimension(RESOURCE_NAME_JHU_FULL_DATA, 'date');
 
     useEffect(() => {
         
@@ -77,7 +52,7 @@ export const Slide3 = ({active}) => {
 
     return (
         <div style={{height: '32rem'}}>
-            <h1>Média móvel do número de óbitos por Covid 19 no Brasil</h1>
+            <h1>Média móvel do número de óbitos por Covid 19 no Brasil, por dia</h1>
             <div ref={barchartRef}/>
         </div>
     );
