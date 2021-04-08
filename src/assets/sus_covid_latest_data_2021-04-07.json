@@ -1,0 +1,164 @@
+[
+    {
+        "state": "SP",
+        "population": 45919049,
+        "cases": 2576362,
+        "deaths": 79443
+    },
+    {
+        "state": "MG",
+        "population": 21168791,
+        "cases": 1182847,
+        "deaths": 26303
+    },
+    {
+        "state": "PR",
+        "population": 11433957,
+        "cases": 869167,
+        "deaths": 18118
+    },
+    {
+        "state": "RS",
+        "population": 11377239,
+        "cases": 875450,
+        "deaths": 21261
+    },
+    {
+        "state": "RJ",
+        "population": 17264943,
+        "cases": 666025,
+        "deaths": 38282
+    },
+    {
+        "state": "GO",
+        "population": 7018354,
+        "cases": 498522,
+        "deaths": 12343
+    },
+    {
+        "state": "CE",
+        "population": 9132078,
+        "cases": 564524,
+        "deaths": 14884
+    },
+    {
+        "state": "BA",
+        "population": 14873064,
+        "cases": 825015,
+        "deaths": 16107
+    },
+    {
+        "state": "MT",
+        "population": 3484466,
+        "cases": 320791,
+        "deaths": 8184
+    },
+    {
+        "state": "DF",
+        "population": 3015268,
+        "cases": 353206,
+        "deaths": 6532
+    },
+    {
+        "state": "RN",
+        "population": 3506853,
+        "cases": 201737,
+        "deaths": 4786
+    },
+    {
+        "state": "ES",
+        "population": 4018650,
+        "cases": 395799,
+        "deaths": 7937
+    },
+    {
+        "state": "SC",
+        "population": 7164788,
+        "cases": 825860,
+        "deaths": 11613
+    },
+    {
+        "state": "PE",
+        "population": 9557071,
+        "cases": 361470,
+        "deaths": 12541
+    },
+    {
+        "state": "MS",
+        "population": 2778986,
+        "cases": 224697,
+        "deaths": 4630
+    },
+    {
+        "state": "PA",
+        "population": 8602865,
+        "cases": 428880,
+        "deaths": 10880
+    },
+    {
+        "state": "RO",
+        "population": 1777225,
+        "cases": 193630,
+        "deaths": 4419
+    },
+    {
+        "state": "PB",
+        "population": 4018127,
+        "cases": 267008,
+        "deaths": 6050
+    },
+    {
+        "state": "MA",
+        "population": 7075181,
+        "cases": 246665,
+        "deaths": 6369
+    },
+    {
+        "state": "PI",
+        "population": 3273227,
+        "cases": 213660,
+        "deaths": 4341
+    },
+    {
+        "state": "AM",
+        "population": 4144597,
+        "cases": 355027,
+        "deaths": 12177
+    },
+    {
+        "state": "SE",
+        "population": 2298696,
+        "cases": 180483,
+        "deaths": 3668
+    },
+    {
+        "state": "TO",
+        "population": 1572866,
+        "cases": 145374,
+        "deaths": 2157
+    },
+    {
+        "state": "AL",
+        "population": 3337357,
+        "cases": 158069,
+        "deaths": 3710
+    },
+    {
+        "state": "AC",
+        "population": 881935,
+        "cases": 71880,
+        "deaths": 1318
+    },
+    {
+        "state": "AP",
+        "population": 845731,
+        "cases": 100292,
+        "deaths": 1356
+    },
+    {
+        "state": "RR",
+        "population": 605761,
+        "cases": 90765,
+        "deaths": 1367
+    }
+]
