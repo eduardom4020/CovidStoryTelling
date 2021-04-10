@@ -166,7 +166,7 @@ export const Slide4 = ({active}) => {
     }, [chartRef.current, transformedData])
 
     return (
-        <div style={{height: '32rem'}}>
+        <div style={{height: '32rem', marginTop: '8rem'}}>
             <h1>Fluxo dos casos de covid no Brasil, por estado</h1>
             <div ref={chartRef}/>
         </div>
