@@ -24,8 +24,7 @@ export const Slide3 = ({active}) => {
                     d3.timeDay.offset(casesTimeDimension.bottom(1)[0].date, -1), 
                     d3.timeDay.offset(casesTimeDimension.top(1)[0].date, 1)
                 ])
-            window.reductio = reductio;
-            window.casesTimeDimension = casesTimeDimension;
+                
             const reducer = reductio()
                 .sum(d => +d.new_deaths_mov_avg);
 
