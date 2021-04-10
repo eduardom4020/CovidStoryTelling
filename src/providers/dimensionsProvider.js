@@ -13,9 +13,11 @@ export const getDimension = (resourceName, dimensionName) => {
         crossfiltersCache[resourceName] = crossfilter(data);
     }
 
+    const dimensionKey = resourceName + dimensionName;
+
     if(!dimensionsCache.hasOwnProperty(dimensionName)) {
-        dimensionsCache[dimensionName] = crossfiltersCache[resourceName].dimension(cx => cx[dimensionName]);
+        dimensionsCache[dimensionKey] = crossfiltersCache[resourceName].dimension(cx => cx[dimensionName]);
     }
 
-    return dimensionsCache[dimensionName];
+    return dimensionsCache[dimensionKey];
 }
