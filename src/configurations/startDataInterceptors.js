@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import { registerDataInterceptor } from '../providers/dataTreatmentInterceptor';
-import { RESOURCE_NAME_JHU_FULL_DATA, MOVING_AVERAGE_WINDOW } from '../constants';
+import { RESOURCE_NAME_JHU_FULL_DATA, RESOURCE_NAME_VACCINATIONS, MOVING_AVERAGE_WINDOW } from '../constants';
 
 export const startDataInterceptors = () => {
 
@@ -35,4 +35,16 @@ export const startDataInterceptors = () => {
         return movingAverageAddedData;
     });
 
+    registerDataInterceptor(RESOURCE_NAME_VACCINATIONS, data => {
+        const dateParser = d3.timeParse('%Y-%m-%d');
+        let lastNewVaccination = 0;
+        return data.map(d => {
+            lastNewVaccination = d.people_fully_vaccinated || lastNewVaccination;
+             return {
+                ...d, 
+              date: dateParser(d.date),
+              people_fully_vaccinated: lastNewVaccination
+            } 
+        });
+    })
 }
