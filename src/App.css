@@ -65,3 +65,32 @@ h2 {
   font-size: 2.5em;
   font-weight: 200;
 }
+
+p {
+  text-align: center;
+}
+
+.row {
+	flex-direction: row;
+}
+
+/* Flex Container */
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
+}
+/* Flex Item */
+.item {
+	flex: 1;
+	margin: 10px;
+	text-align: center;
+}
+
+#outer {
+  align-items: center;
+  display: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
