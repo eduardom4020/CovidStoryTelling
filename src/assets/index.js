@@ -6,6 +6,9 @@ import jhuFullDataWithForecastNewZealand from './jhu_full_data_w_forecast_new_ze
 import covidLatest from './covid_latest_data_2021-04-07.json';
 import susCovidLatest from './sus_covid_latest_data_2021-04-07.json';
 
+import vaccinationsUSA from './vaccinations_USA_2021-04-11.json';
+import jhuFullDataUSA from './jhu_full_data_USA_2021-04-11';
+
 export default {
     vaccinations,
     jhuFullData,
@@ -13,5 +16,7 @@ export default {
     susCovidLatest,
     jhuFullDataWithForecast,
     jhuFullDataWithForecastBrazil,
-    jhuFullDataWithForecastNewZealand
+    jhuFullDataWithForecastNewZealand,
+    vaccinationsUSA,
+    jhuFullDataUSA
 };
