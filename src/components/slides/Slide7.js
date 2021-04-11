@@ -3,7 +3,12 @@ import * as dc from 'dc';
 import * as d3 from 'd3';
 import reductio from 'reductio';
 
-import { RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST_NEW_ZEALAND, RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST_BRAZIL } from '../../constants';
+import { 
+    RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST_NEW_ZEALAND, 
+    RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST_BRAZIL,
+    POPULATION_BRAZIL, 
+    POPULATION_UNITED_KINGDOM 
+} from '../../constants';
 import { useDimension } from '../../hooks/useDimension';
 
 export const Slide7 = ({active}) => {
@@ -26,21 +31,14 @@ export const Slide7 = ({active}) => {
                     d3.timeDay.offset(Math.max(brazilTimeDimension.top(1)[0].date, newZealandTimeDimension.top(1)[0].date), 1)
                 ])
                 
-            // const reducer = reductio()
-            //     .sum(d => +d.new_cases);
-            console.log(scale.domain)
-            const groupBrazil = brazilTimeDimension.group().reduceSum(d => +d.new_deaths / 211000000);
-            const groupNewZealand = newZealandTimeDimension.group().reduceSum(d => +d.new_deaths / 66200000);
-            // reducer(group);
+            const groupBrazil = brazilTimeDimension.group().reduceSum(d => +d.new_deaths >= 0 ? +d.new_deaths / POPULATION_BRAZIL : 0);
+            const groupNewZealand = newZealandTimeDimension.group().reduceSum(d => +d.new_deaths >= 0 ? +d.new_deaths / POPULATION_UNITED_KINGDOM : 0);
             
             chart.width(width)
                 .height(height)
                 .margins({top: 10, right: 50, bottom: 20, left: 70})
                 .x(scale)
                 .xUnits(d3.timeDays)
-                // .dimension(casesTimeDimension)
-                // .group(group)
-                // .centerBar(true)
                 .elasticY(true)
                 .renderHorizontalGridLines(true)
                 .compose([
@@ -48,15 +46,11 @@ export const Slide7 = ({active}) => {
                         .dimension(brazilTimeDimension)
                         .colors('red')
                         .group(groupBrazil, "Brazil"),
-                        // .dashStyle([2,2]),
                     dc.lineChart(chart)
                         .dimension(newZealandTimeDimension)
                         .colors('blue')
                         .group(groupNewZealand, "New Zealand")
-                        // .dashStyle([5,5])
                     ]);
-
-            // chart.valueAccessor(d => d.value.sum);
 
             dc.renderAll('slide7');
         }
@@ -65,7 +59,7 @@ export const Slide7 = ({active}) => {
 
     return (
         <div style={{height: '32rem', marginTop: '8rem'}}>
-            <h1>Previsão dos casos de covid após o dia 10/04/2021</h1>
+            <h1>Comparativo de casos entre Brazil e Reino Unido, com previsão para um mês a frente.</h1>
             <div ref={barchartRef}/>
         </div>
     );

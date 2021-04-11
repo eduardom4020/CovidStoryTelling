@@ -15,6 +15,8 @@ export const getDimension = (resourceName, dimensionName) => {
 
     const dimensionKey = resourceName + dimensionName;
 
+    // console.log({dimensionKey, crossfiltersCache, dimensionsCache})
+
     if(!dimensionsCache.hasOwnProperty(dimensionName)) {
         dimensionsCache[dimensionKey] = crossfiltersCache[resourceName].dimension(cx => cx[dimensionName]);
     }
