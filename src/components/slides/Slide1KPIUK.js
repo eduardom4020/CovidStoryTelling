@@ -74,10 +74,8 @@ export const Slide1KPIUK = ({active}) => {
     let maximumCasesDay = dailyCasesGroup && dailyCasesGroup.order(d => d.max).top(1)[0];
     let maximumDeathsDay = dailyDeathsGroup && dailyDeathsGroup.order(d => d.max).top(1)[0];
 
-    window.totalDeathsGroup = totalDeathsGroup;
-
     return (
-        <div style={{fontFamily: '"Palatino", sans-serif', margin: '5rem', marginTop: '20rem'}}>
+        <div style={{fontFamily: '"Palatino", sans-serif', margin: '5rem'}}>
             <h2>Indicadores do Covid-19 no Reino Unido</h2>
             <p>
                 Estes são alguns indicadores importantes, que resumem as análises feitas neste estudo.

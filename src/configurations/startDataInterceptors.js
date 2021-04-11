@@ -80,7 +80,8 @@ export const startDataInterceptors = () => {
              return {
                 ...d, 
               date: dateParser(d.date),
-              people_fully_vaccinated: lastNewVaccination
+              people_fully_vaccinated: lastNewVaccination,
+              week: d3.timeWeek(d.date)
             } 
         });
     });
