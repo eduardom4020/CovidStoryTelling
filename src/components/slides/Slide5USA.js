@@ -3,39 +3,37 @@ import * as dc from 'dc';
 import * as d3 from 'd3';
 import reductio from 'reductio';
 
-import { RESOURCE_NAME_JHU_FULL_DATA, RESOURCE_NAME_VACCINATIONS } from '../../constants';
+import { RESOURCE_NAME_JHU_FULL_DATA_EUA, RESOURCE_NAME_VACCINATIONS_EUA } from '../../constants';
 import { useDimension } from '../../hooks/useDimension';
 
-export const Slide5 = ({active}) => {
+export const Slide5USA = ({active}) => {
     const barchartRef = useRef();
 
-    const casesTimeDimension = useDimension(RESOURCE_NAME_JHU_FULL_DATA, 'date');
-    const vaccitationTimeDimension = useDimension(RESOURCE_NAME_VACCINATIONS, 'date')
+    const casesTimeDimensionUSA = useDimension(RESOURCE_NAME_JHU_FULL_DATA_EUA, 'date');
+    const vaccitationTimeDimensionUSA = useDimension(RESOURCE_NAME_VACCINATIONS_EUA, 'date')
 
     useEffect(() => {
         
-        if(casesTimeDimension && vaccitationTimeDimension) {
+        if(casesTimeDimensionUSA && vaccitationTimeDimensionUSA) {
             const chartDOM = barchartRef.current;
             const { width, height } = chartDOM.parentNode.getBoundingClientRect();
 
-            const chart = dc.compositeChart(chartDOM, 'Slide5');
+            const chart = dc.compositeChart(chartDOM, 'Slide5USA');
 
             const scale = d3.scaleTime()
                 .domain([ 
-                    d3.timeDay.offset(Math.min(casesTimeDimension.bottom(1)[0].date, vaccitationTimeDimension.bottom(1)[0].date), -1), 
-                    d3.timeDay.offset(Math.max(casesTimeDimension.top(1)[0].date, vaccitationTimeDimension.top(1)[0].date), 1)
+                    d3.timeDay.offset(Math.min(casesTimeDimensionUSA.bottom(1)[0].date, vaccitationTimeDimensionUSA.bottom(1)[0].date), -1), 
+                    d3.timeDay.offset(Math.max(casesTimeDimensionUSA.top(1)[0].date, vaccitationTimeDimensionUSA.top(1)[0].date), 1)
                 ])
-                
-                
-            console.log(scale.domain)    
-            
+                              
            // const reducer = reductio().max(d => +d.people_fully_vaccinated);
 
-            const groupVaccination = vaccitationTimeDimension.group().reduceSum(d => +d.daily_vaccinations);
-            const groupCases = casesTimeDimension.group().reduceSum(d => +d.new_cases);
+            const groupVaccinationUSA = vaccitationTimeDimensionUSA.group().reduceSum(d => +d.daily_vaccinations);
+            const groupCasesUSA = casesTimeDimensionUSA.group().reduceSum(d => +d.new_cases);
             
             
-            //console.log(vaccitationTimeDimension.top(1000))
+            console.log(vaccitationTimeDimensionUSA.top(1000))
+            console.log(casesTimeDimensionUSA.top(1000))
             
             chart.width(width)
                 .height(height)
@@ -50,27 +48,27 @@ export const Slide5 = ({active}) => {
                 .legend(dc.legend().x(width-200).y(5).itemHeight(13).gap(5))
                 .compose([
                     dc.barChart(chart)
-                        .dimension(vaccitationTimeDimension)
+                        .dimension(vaccitationTimeDimensionUSA)
                         .colors('green')
-                        .group(groupVaccination, "Vacinados por dia"),
+                        .group(groupVaccinationUSA, "Vacinados por dia"),
                         // .dashStyle([2,2]),
                     dc.barChart(chart)
-                        .dimension(casesTimeDimension)
+                        .dimension(casesTimeDimensionUSA)
                         .colors('red')
-                        .group(groupCases, "Casos diários")
+                        .group(groupCasesUSA, "Casos diários")
                         // .dashStyle([5,5])
                     ]);
 
             chart.valueAccessor(d => d.value.max);
 
-            dc.renderAll('Slide5');
+            dc.renderAll('Slide5USA');
         }
 
-    }, [casesTimeDimension, vaccitationTimeDimension, barchartRef.current])
+    }, [casesTimeDimensionUSA, vaccitationTimeDimensionUSA, barchartRef.current])
 
     return (
         <div style={{height: '32rem', marginTop: '8rem'}}>
-            <h1>Vacinação diária no Brasil x Quantidade de Casos</h1>
+            <h1>Vacinação diária nos EUA x Quantidade de Casos</h1>
             <div ref={barchartRef}/>
         </div>
     );
