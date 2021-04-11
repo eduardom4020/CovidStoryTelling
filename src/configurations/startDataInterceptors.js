@@ -4,7 +4,9 @@ import {
     RESOURCE_NAME_JHU_FULL_DATA, 
     RESOURCE_NAME_VACCINATIONS, 
     MOVING_AVERAGE_WINDOW, 
-    RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST
+    RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST,
+    RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST_BRAZIL,
+    RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST_NEW_ZEALAND
 } from '../constants';
 
 export const startDataInterceptors = () => {
@@ -54,6 +56,46 @@ export const startDataInterceptors = () => {
     });
 
     registerDataInterceptor(RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST, data => {
+        const dateParser = d3.timeParse('%Y-%m-%d');
+        let lastNewDeaths = 0;
+        let lastNewCases = 0;
+
+        const adjustedData = data.map(d => {
+            lastNewDeaths = d.new_deaths || lastNewDeaths;
+            lastNewCases = d.new_cases || lastNewCases;
+
+            return {
+                ...d, 
+                date: dateParser(d.date),
+                new_deaths: lastNewDeaths,
+                new_cases: lastNewCases
+            } 
+        });
+
+        return adjustedData;
+    });
+
+    registerDataInterceptor(RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST_BRAZIL, data => {
+        const dateParser = d3.timeParse('%Y-%m-%d');
+        let lastNewDeaths = 0;
+        let lastNewCases = 0;
+
+        const adjustedData = data.map(d => {
+            lastNewDeaths = d.new_deaths || lastNewDeaths;
+            lastNewCases = d.new_cases || lastNewCases;
+
+            return {
+                ...d, 
+                date: dateParser(d.date),
+                new_deaths: lastNewDeaths,
+                new_cases: lastNewCases
+            } 
+        });
+
+        return adjustedData;
+    });
+
+    registerDataInterceptor(RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST_NEW_ZEALAND, data => {
         const dateParser = d3.timeParse('%Y-%m-%d');
         let lastNewDeaths = 0;
         let lastNewCases = 0;
