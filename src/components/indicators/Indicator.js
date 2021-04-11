@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Indicator = ({imgSrc, title, valueText}) => (
     <div style={{
-        width: '14rem', height: '8rem', display: 'flex', 
+        width: '16rem', height: '8rem', display: 'flex', 
         justifyContent: 'space-between', alignItems: 'center',
         backgroundColor: '#f1f1f1', overflow:'hidden', 
         border: '1px solid #bdbdbd', fontFamily: "'Courier New', monospace"
