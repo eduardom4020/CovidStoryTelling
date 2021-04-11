@@ -8,7 +8,7 @@ export const StoryScrollableContainer = ({children}) => {
         if(containerRef.current) {
             const childrenDOM = [...containerRef.current.children];
             const childrenTop = childrenDOM.map(c => c.getBoundingClientRect().y);
-            const slideNumber = childrenTop.length - childrenTop.reverse().findIndex(y => y <= 0);
+            const slideNumber = childrenTop.length - childrenTop.reverse().findIndex(y => y <= 30);
             setSlideIndex(slideNumber);
         }
     }

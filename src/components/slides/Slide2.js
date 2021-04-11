@@ -61,7 +61,7 @@ export const Slide2 = ({active}) => {
 
         if(focused && !active)
             setTimeout(() => setFocused(false), 200);
-    }, [active])
+    }, [active, focused])
 
     useEffect(() => {
         if(currentChart && focused != null && baseWidth) {
@@ -82,7 +82,7 @@ export const Slide2 = ({active}) => {
                 <div style={{
                     flex: 1, transition: 'max-width .5s ease-in-out', 
                     maxWidth: focused ? '15%' : 0, overflow: 'hidden',
-                    height: '80%', padding: focused ? '.5rem' : 0, backgroundColor: '#00000070', 
+                    height: '80%', padding: focused ? '.5rem' : 0, backgroundColor: '#bdbdbd', 
                     borderRadius: '.5rem'
                 }}>
                     <p style={{
