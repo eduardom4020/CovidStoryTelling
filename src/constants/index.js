@@ -10,7 +10,9 @@ export const RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST_NEW_ZEALAND = 'jhuFullDat
 export const MOVING_AVERAGE_WINDOW = 7;
 export const POPULATION_BRAZIL = 211000000;
 export const POPULATION_UNITED_KINGDOM = 66200000;
+export const POPULATION_USA = 329600000;
 
 export const ICON_VACCINATION = 'https://static.thenounproject.com/png/2970515-200.png';
 export const RESOURCE_NAME_VACCINATIONS_EUA = 'vaccinationsUSA';
 export const RESOURCE_NAME_JHU_FULL_DATA_EUA = 'jhuFullDataUSA';
+export const RESOURCE_NAME_COVID_LATEST_DATA_EUA = 'covidLatestUSA';
