@@ -4,17 +4,17 @@ import * as d3 from 'd3';
 import reductio from 'reductio';
 
 import { 
-    RESOURCE_NAME_JHU_FULL_DATA, 
-    RESOURCE_NAME_VACCINATIONS,
+    RESOURCE_NAME_JHU_FULL_DATA_UK, 
+    RESOURCE_NAME_VACCINATIONS_UK,
     ICON_VACCINATION,
     ICON_INFECTION,
     ICON_MOURNING,
-    POPULATION_BRAZIL
+    POPULATION_UK
 } from '../../constants';
 import { useDimension } from '../../hooks/useDimension';
 import { Indicator } from '../indicators/Indicator';
 
-export const Slide1 = ({active}) => {
+export const Slide1KPIUK = ({active}) => {
     const barchartRef = useRef();
 
     const [ immuneGroup, setImmuneGroup ] = useState();
@@ -24,18 +24,18 @@ export const Slide1 = ({active}) => {
     const [ dailyCasesGroup, setDailyCasesGroup ] = useState();
     const [ dailyDeathsGroup, setDailyDeathsGroup ] = useState();
 
-    const vaccinationTimeDimension = useDimension(RESOURCE_NAME_VACCINATIONS, 'date');
-    const fullDataTimeDimension = useDimension(RESOURCE_NAME_JHU_FULL_DATA, 'date');
+    const vaccinationTimeDimension = useDimension(RESOURCE_NAME_VACCINATIONS_UK, 'date');
+    const fullDataTimeDimension = useDimension(RESOURCE_NAME_JHU_FULL_DATA_UK, 'date');
 
     useEffect(() => {
         if(vaccinationTimeDimension) {
 
-            const reducer = reductio().max(d => +d.people_vaccinated / POPULATION_BRAZIL);
+            const reducer = reductio().max(d => +d.people_vaccinated / POPULATION_UK);
             const vGroup = vaccinationTimeDimension.group();
             reducer(vGroup);
             setVaccinatedGroup(vGroup);
 
-            const reducerImmune = reductio().max(d => +d.people_fully_vaccinated / POPULATION_BRAZIL);
+            const reducerImmune = reductio().max(d => +d.people_fully_vaccinated / POPULATION_UK);
             const vGroupImmune = vaccinationTimeDimension.group();
             reducerImmune(vGroupImmune);
             setImmuneGroup(vGroupImmune);
@@ -74,25 +74,11 @@ export const Slide1 = ({active}) => {
     let maximumCasesDay = dailyCasesGroup && dailyCasesGroup.order(d => d.max).top(1)[0];
     let maximumDeathsDay = dailyDeathsGroup && dailyDeathsGroup.order(d => d.max).top(1)[0];
 
+    window.totalDeathsGroup = totalDeathsGroup;
+
     return (
-        <div style={{fontFamily: '"Palatino", sans-serif', margin: '5rem'}}>
-            <h1>Como está o progresso das vacinações contra o Covid-19 hoje?</h1>
-            <span>em 10/07/2021</span>
-            <br/>
-            <p>
-                A pandemia de Covid-19 tem se alastrado pelo mundo por mais de um ano.
-                Árduo foi o caminho dos cientistas até aqui, para criar e disponibilizar 
-                vacinas e curar a humanidade o mais rapidamente possível.
-                <br/>
-                Após períodos de conturbação, o surgimento da variante brasileira do Covid 
-                e de tantas outras surpresas e incertezas, as vacinações finalmente começaram 
-                a ser realizadas em nosso pais.
-                <br/>
-                Este estudo visa analisar se a vacinação realmente é eficiente, se já está apresentando 
-                resultados positivos e, se não, o que deve ser feito para que o País possa 
-                voltar, em breve, a sua rotina do novo normal, sem a presença do vírus.
-            </p>
-            <h2>Indicadores</h2>
+        <div style={{fontFamily: '"Palatino", sans-serif', margin: '5rem', marginTop: '20rem'}}>
+            <h2>Indicadores do Covid-19 no Reino Unido</h2>
             <p>
                 Estes são alguns indicadores importantes, que resumem as análises feitas neste estudo.
             </p>
@@ -123,13 +109,13 @@ export const Slide1 = ({active}) => {
                 />
                 <Indicator
                     imgSrc={ICON_INFECTION}
-                    title={<>Dia com maior número de casos<br/><b>{maximumCasesDay && maximumCasesDay.key.toLocaleDateString()}</b></>}
+                    title={<>Dia com maior número de casos<br/><b>{maximumCasesDay && maximumCasesDay.key.toLocaleString()}</b></>}
                     valueText={maximumCasesDay && maximumCasesDay.value.max.toLocaleString()}
                     style={{backgroundColor: '#424242', color: '#bdbdbd', border: '1px solid #000000', margin: '.5rem'}}
                 />
                 <Indicator
                     imgSrc={ICON_MOURNING}
-                    title={<>Dia com maior número de mortes<br/><b>{maximumDeathsDay && maximumDeathsDay.key.toLocaleDateString()}</b></>}
+                    title={<>Dia com maior número de mortes<br/><b>{maximumDeathsDay && maximumDeathsDay.key.toLocaleString()}</b></>}
                     valueText={maximumDeathsDay && maximumDeathsDay.value.max.toLocaleString()}
                     style={{backgroundColor: '#424242', color: '#bdbdbd', border: '1px solid #000000', margin: '.5rem'}}
                 />

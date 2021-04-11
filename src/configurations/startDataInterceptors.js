@@ -8,7 +8,9 @@ import {
     RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST_BRAZIL,
     RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST_NEW_ZEALAND,
     RESOURCE_NAME_VACCINATIONS_EUA,
-    RESOURCE_NAME_JHU_FULL_DATA_EUA
+    RESOURCE_NAME_JHU_FULL_DATA_EUA,
+    RESOURCE_NAME_VACCINATIONS_UK,
+    RESOURCE_NAME_JHU_FULL_DATA_UK
 } from '../constants';
 
 export const startDataInterceptors = () => {
@@ -57,6 +59,19 @@ export const startDataInterceptors = () => {
         });
     });
 
+    registerDataInterceptor(RESOURCE_NAME_JHU_FULL_DATA_UK, data => {
+        const dateParser = d3.timeParse('%Y-%m-%d');
+        let lastNewDeaths = 0;
+        return data.map(d => {
+            lastNewDeaths = d.new_deaths || lastNewDeaths;
+             return {
+                ...d, 
+              date: dateParser(d.date),
+              new_deaths: lastNewDeaths
+            } 
+        });
+    });
+
     registerDataInterceptor(RESOURCE_NAME_VACCINATIONS, data => {
         const dateParser = d3.timeParse('%Y-%m-%d');
         let lastNewVaccination = 0;
@@ -71,6 +86,19 @@ export const startDataInterceptors = () => {
     });
 
     registerDataInterceptor(RESOURCE_NAME_VACCINATIONS_EUA, data => {
+        const dateParser = d3.timeParse('%Y-%m-%d');
+        let lastNewVaccination = 0;
+        return data.map(d => {
+            lastNewVaccination = d.people_fully_vaccinated || lastNewVaccination;
+             return {
+                ...d, 
+              date: dateParser(d.date),
+              people_fully_vaccinated: lastNewVaccination
+            } 
+        });
+    });
+
+    registerDataInterceptor(RESOURCE_NAME_VACCINATIONS_UK, data => {
         const dateParser = d3.timeParse('%Y-%m-%d');
         let lastNewVaccination = 0;
         return data.map(d => {
