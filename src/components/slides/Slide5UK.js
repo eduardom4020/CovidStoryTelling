@@ -3,18 +3,18 @@ import * as dc from 'dc';
 import * as d3 from 'd3';
 import reductio from 'reductio';
 
-import { RESOURCE_NAME_JHU_FULL_DATA_EUA, RESOURCE_NAME_VACCINATIONS_EUA } from '../../constants';
+import { RESOURCE_NAME_JHU_FULL_DATA_UK, RESOURCE_NAME_VACCINATIONS_UK } from '../../constants';
 import { useDimension } from '../../hooks/useDimension';
 
-export const Slide5USA = ({active}) => {
+export const Slide5UK = ({active}) => {
     const barchartRef = useRef();
 
-    const casesTimeDimensionUSA = useDimension(RESOURCE_NAME_JHU_FULL_DATA_EUA, 'date');
-    const vaccitationTimeDimensionUSA = useDimension(RESOURCE_NAME_VACCINATIONS_EUA, 'date')
+    const casesTimeDimensionUK = useDimension(RESOURCE_NAME_JHU_FULL_DATA_UK, 'date');
+    const vaccitationTimeDimensionUK = useDimension(RESOURCE_NAME_VACCINATIONS_UK, 'date')
 
     useEffect(() => {
         
-        if(casesTimeDimensionUSA && vaccitationTimeDimensionUSA) {
+        if(casesTimeDimensionUK && vaccitationTimeDimensionUK) {
             const chartDOM = barchartRef.current;
             const { width, height } = chartDOM.parentNode.getBoundingClientRect();
 
@@ -22,14 +22,18 @@ export const Slide5USA = ({active}) => {
 
             const scale = d3.scaleTime()
                 .domain([ 
-                    d3.timeDay.offset(Math.min(casesTimeDimensionUSA.bottom(1)[0].date, vaccitationTimeDimensionUSA.bottom(1)[0].date), -1), 
-                    d3.timeDay.offset(Math.max(casesTimeDimensionUSA.top(1)[0].date, vaccitationTimeDimensionUSA.top(1)[0].date), 1)
+                    d3.timeDay.offset(Math.min(casesTimeDimensionUK.bottom(1)[0].date, vaccitationTimeDimensionUK.bottom(1)[0].date), -1), 
+                    d3.timeDay.offset(Math.max(casesTimeDimensionUK.top(1)[0].date, vaccitationTimeDimensionUK.top(1)[0].date), 1)
                 ])
                               
            // const reducer = reductio().max(d => +d.people_fully_vaccinated);
 
-            const groupVaccinationUSA = vaccitationTimeDimensionUSA.group().reduceSum(d => +d.daily_vaccinations);
-            const groupCasesUSA = casesTimeDimensionUSA.group().reduceSum(d => +d.new_cases);
+            const groupVaccinationUK = vaccitationTimeDimensionUK.group().reduceSum(d => +d.daily_vaccinations);
+            const groupCasesUK = casesTimeDimensionUK.group().reduceSum(d => +d.new_cases);
+            
+            
+            console.log(vaccitationTimeDimensionUK.top(1000))
+            console.log(casesTimeDimensionUK.top(1000))
             
             chart.width(width)
                 .height(height)
@@ -44,27 +48,27 @@ export const Slide5USA = ({active}) => {
                 .legend(dc.legend().x(width-200).y(5).itemHeight(13).gap(5))
                 .compose([
                     dc.barChart(chart)
-                        .dimension(vaccitationTimeDimensionUSA)
+                        .dimension(vaccitationTimeDimensionUK)
                         .colors('green')
-                        .group(groupVaccinationUSA, "Vacinados por dia"),
+                        .group(groupVaccinationUK, "Vacinados por dia"),
                         // .dashStyle([2,2]),
                     dc.barChart(chart)
-                        .dimension(casesTimeDimensionUSA)
+                        .dimension(casesTimeDimensionUK)
                         .colors('red')
-                        .group(groupCasesUSA, "Casos diários")
+                        .group(groupCasesUK, "Casos diários")
                         // .dashStyle([5,5])
                     ]);
 
             chart.valueAccessor(d => d.value.max);
 
-            dc.renderAll('Slide5USA');
+            dc.renderAll('Slide5UK');
         }
 
-    }, [casesTimeDimensionUSA, vaccitationTimeDimensionUSA, barchartRef.current])
+    }, [casesTimeDimensionUK, vaccitationTimeDimensionUK, barchartRef.current])
 
     return (
         <div style={{height: '32rem', marginTop: '8rem'}}>
-            <h1>Vacinação diária nos EUA x Quantidade de Casos</h1>
+            <h1>Vacinação diária no Reino Unido x Quantidade de Casos</h1>
             <div ref={barchartRef}/>
         </div>
     );
