@@ -51,3 +51,17 @@ path.line {
 .link:hover {
   stroke-opacity: .5;
 }
+
+p {
+  text-align: justify;
+}
+
+h1 {
+  font-size: 4em;
+  font-weight: 300;
+}
+
+h2 {
+  font-size: 2.5em;
+  font-weight: 200;
+}
