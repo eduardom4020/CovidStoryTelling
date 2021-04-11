@@ -1,6 +1,11 @@
 import * as d3 from 'd3';
 import { registerDataInterceptor } from '../providers/dataTreatmentInterceptor';
-import { RESOURCE_NAME_JHU_FULL_DATA, RESOURCE_NAME_VACCINATIONS, MOVING_AVERAGE_WINDOW } from '../constants';
+import { 
+    RESOURCE_NAME_JHU_FULL_DATA, 
+    RESOURCE_NAME_VACCINATIONS, 
+    MOVING_AVERAGE_WINDOW, 
+    RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST
+} from '../constants';
 
 export const startDataInterceptors = () => {
 
@@ -46,5 +51,25 @@ export const startDataInterceptors = () => {
               people_fully_vaccinated: lastNewVaccination
             } 
         });
-    })
+    });
+
+    registerDataInterceptor(RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST, data => {
+        const dateParser = d3.timeParse('%Y-%m-%d');
+        let lastNewDeaths = 0;
+        let lastNewCases = 0;
+
+        const adjustedData = data.map(d => {
+            lastNewDeaths = d.new_deaths || lastNewDeaths;
+            lastNewCases = d.new_cases || lastNewCases;
+
+            return {
+                ...d, 
+                date: dateParser(d.date),
+                new_deaths: lastNewDeaths,
+                new_cases: lastNewCases
+            } 
+        });
+
+        return adjustedData;
+    });
 }
