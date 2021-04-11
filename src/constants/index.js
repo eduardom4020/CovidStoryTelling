@@ -7,4 +7,7 @@ export const RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST = 'jhuFullDataWithForecas
 export const RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST_BRAZIL = 'jhuFullDataWithForecastBrazil';
 export const RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST_NEW_ZEALAND = 'jhuFullDataWithForecastNewZealand';
 
+export const RESOURCE_NAME_VACCINATIONS_EUA = 'vaccinationsUSA';
+export const RESOURCE_NAME_JHU_FULL_DATA_EUA = 'jhuFullDataUSA';
+
 export const MOVING_AVERAGE_WINDOW = 7;
