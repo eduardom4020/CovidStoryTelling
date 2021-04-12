@@ -43,14 +43,16 @@ export const Slide5USA = ({active}) => {
                 .renderHorizontalGridLines(true)
                 .legend(dc.legend().x(width-200).y(5).itemHeight(13).gap(5))
                 .compose([
-                    dc.barChart(chart)
+                    dc.lineChart(chart)
                         .dimension(vaccitationTimeDimensionUSA)
                         .colors('green')
+                        .renderArea(true)
                         .group(groupVaccinationUSA, "Vacinados por dia"),
                         // .dashStyle([2,2]),
-                    dc.barChart(chart)
+                    dc.lineChart(chart)
                         .dimension(casesTimeDimensionUSA)
                         .colors('red')
+                        .renderArea(true)
                         .group(groupCasesUSA, "Casos diários")
                         // .dashStyle([5,5])
                     ]);

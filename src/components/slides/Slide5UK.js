@@ -25,15 +25,9 @@ export const Slide5UK = ({active}) => {
                     d3.timeDay.offset(Math.min(casesTimeDimensionUK.bottom(1)[0].date, vaccitationTimeDimensionUK.bottom(1)[0].date), -1), 
                     d3.timeDay.offset(Math.max(casesTimeDimensionUK.top(1)[0].date, vaccitationTimeDimensionUK.top(1)[0].date), 1)
                 ])
-                              
-           // const reducer = reductio().max(d => +d.people_fully_vaccinated);
 
             const groupVaccinationUK = vaccitationTimeDimensionUK.group().reduceSum(d => +d.daily_vaccinations);
             const groupCasesUK = casesTimeDimensionUK.group().reduceSum(d => +d.new_cases);
-            
-            
-            console.log(vaccitationTimeDimensionUK.top(1000))
-            console.log(casesTimeDimensionUK.top(1000))
             
             chart.width(width)
                 .height(height)
@@ -47,14 +41,16 @@ export const Slide5UK = ({active}) => {
                 .renderHorizontalGridLines(true)
                 .legend(dc.legend().x(width-200).y(5).itemHeight(13).gap(5))
                 .compose([
-                    dc.barChart(chart)
+                    dc.lineChart(chart)
                         .dimension(vaccitationTimeDimensionUK)
                         .colors('green')
+                        .renderArea(true)
                         .group(groupVaccinationUK, "Vacinados por dia"),
                         // .dashStyle([2,2]),
-                    dc.barChart(chart)
+                    dc.lineChart(chart)
                         .dimension(casesTimeDimensionUK)
                         .colors('red')
+                        .renderArea(true)
                         .group(groupCasesUK, "Casos diários")
                         // .dashStyle([5,5])
                     ]);

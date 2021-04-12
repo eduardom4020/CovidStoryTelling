@@ -1,4 +1,5 @@
 import { Slide1 } from './Slide1'; 
+import { SlideKPIsCompacto } from './SlideKPIsCompacto';
 import { Slide2 } from './Slide2'; 
 import { Slide3 } from './Slide3'; 
 import { Slide5 } from './Slide5';
@@ -14,12 +15,13 @@ export default [
     Slide1,
     Slide2,
     Slide3,
+    SlideKPIsCompacto,
     Slide5,
-    Slide1KPIUSA,
     Slide5USA,
+    Slide5UK,
     Slide6,
     Slide7,
     SlideFinal
     // Slide1KPIUK,
-    // Slide5UK
+    
 ];
