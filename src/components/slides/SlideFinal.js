@@ -33,7 +33,7 @@ export const SlideFinal = ({active}) => (
             Ass,
             <br/>
             <br/>
-            Eduardo Melo
+            Eduardo
             <br/>
             Thiago
             <br/>

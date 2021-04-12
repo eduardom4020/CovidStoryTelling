@@ -71,9 +71,10 @@ export const Slide5 = ({active}) => {
     }, [casesTimeDimension, vaccitationTimeDimension, barchartRef.current])
 
     return (
-        <div style={{height: '32rem', marginTop: '8rem'}}>
-            <h2>Vacinação diária no Brasil x Quantidade de Casos</h2>
-            <div ref={barchartRef}/>
+        <div style={{height: '15rem', marginTop: '3rem'}}>
+            <h2>Vacinação diária x Quantidade de Casos</h2>
+            <p style={{textAlign: 'center'}}>Brasil</p>
+            <div style={{height: '10rem'}} ref={barchartRef}/>
         </div>
     );
 }

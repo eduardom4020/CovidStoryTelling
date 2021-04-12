@@ -18,7 +18,7 @@ export const Slide5UK = ({active}) => {
             const chartDOM = barchartRef.current;
             const { width, height } = chartDOM.parentNode.getBoundingClientRect();
 
-            const chart = dc.compositeChart(chartDOM, 'Slide5USA');
+            const chart = dc.compositeChart(chartDOM, 'Slide5UK');
 
             const scale = d3.scaleTime()
                 .domain([ 
@@ -63,9 +63,9 @@ export const Slide5UK = ({active}) => {
     }, [casesTimeDimensionUK, vaccitationTimeDimensionUK, barchartRef.current])
 
     return (
-        <div style={{height: '32rem', marginTop: '8rem'}}>
-            <h2>Vacinação diária no Reino Unido x Quantidade de Casos</h2>
-            <div ref={barchartRef}/>
+        <div style={{height: '15rem', marginTop: '5rem'}}>
+            <p style={{textAlign: 'center'}}>Inglaterra</p>
+            <div style={{height: '10rem'}} ref={barchartRef}/>
         </div>
     );
 }
