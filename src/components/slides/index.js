@@ -15,9 +15,9 @@ export default [
     Slide2,
     Slide3,
     Slide5,
+    Slide6,
     Slide1KPIUSA,
     Slide5USA,
-    Slide6,
     Slide7,
     SlideFinal
     // Slide1KPIUK,
