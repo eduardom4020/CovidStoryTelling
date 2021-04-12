@@ -5,6 +5,7 @@ import jhuFullDataWithForecastBrazil from './jhu_full_data_w_forecast_brazil_202
 import jhuFullDataWithForecastUK from './jhu_full_data_w_forecast_uk_2021-04-11.json';
 import covidLatest from './covid_latest_data_2021-04-07.json';
 import susCovidLatest from './sus_covid_latest_data_2021-04-07.json';
+import susCovidLatestDataWithVaccinations from './sus_covid_latest_data_with_vaccinations.json';
 
 import vaccinationsUSA from './vaccinations_USA_2021-04-11.json';
 import jhuFullDataUSA from './jhu_full_data_USA_2021-04-11.json';
@@ -27,5 +28,6 @@ export default {
     covidLatestUSA, 
     vaccinationsUK,
     jhuFullDataUK,
-    covidLatestUK
+    covidLatestUK,
+    susCovidLatestDataWithVaccinations
 };
