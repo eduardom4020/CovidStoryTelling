@@ -188,8 +188,8 @@ export const Slide1 = ({active}) => {
     return (
         <div style={{fontFamily: '"Palatino", sans-serif'}}>
             <div style={{margin: '5rem'}} >
-                <h1>Como está o progresso das vacinações contra o Covid-19 hoje?</h1>
-                <span>em 10/07/2021</span>
+                <h1>Como está o progresso das vacinações <br/> contra o Covid-19 hoje?</h1>
+                <span>Em 10/04/2021</span>
                 <br/>
                 <p>
                     A pandemia de Covid-19 tem se alastrado pelo mundo por mais de um ano.

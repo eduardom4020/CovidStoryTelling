@@ -70,7 +70,7 @@ export const Slide5 = ({active}) => {
 
     return (
         <div style={{height: '32rem', marginTop: '8rem'}}>
-            <h1>Vacinação diária no Brasil x Quantidade de Casos</h1>
+            <h2>Vacinação diária no Brasil x Quantidade de Casos</h2>
             <div ref={barchartRef}/>
         </div>
     );
