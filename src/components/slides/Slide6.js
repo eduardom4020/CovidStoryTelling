@@ -66,7 +66,7 @@ export const Slide6 = ({active}) => {
 
     return (
         <div style={{height: '32rem', marginTop: '8rem'}}>
-            <h1>Mapa da Vacinação por Estado</h1>
+            <h2>Mapa da Vacinação por Estado no Brasil</h2>
             <section class="container row">
                 <div class="item" onClick={setDisplay}>
                     <MapBrazil onChange={setDistrict} width={500} height={500} fill='#EC674B' />

@@ -17,9 +17,9 @@ export default [
     Slide3,
     SlideKPIsCompacto,
     Slide5,
+    Slide6,
     Slide5USA,
     Slide5UK,
-    Slide6,
     Slide7,
     SlideFinal
     // Slide1KPIUK,
