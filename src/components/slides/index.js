@@ -7,6 +7,8 @@ import { Slide7 } from './Slide7';
 import { Slide1KPIUSA } from './Slide1KPIUSA';
 import { Slide1KPIUK } from './Slide1KPIUK';
 import { Slide5UK } from './Slide5UK';
+import { Slide6 } from './Slide6';
+import { SlideFinal } from './SlideFinal';
 
 export default [
     Slide1,
@@ -15,7 +17,9 @@ export default [
     Slide5,
     Slide1KPIUSA,
     Slide5USA,
-    Slide7, 
-    Slide1KPIUK,
-    Slide5UK
+    Slide6,
+    Slide7,
+    SlideFinal
+    // Slide1KPIUK,
+    // Slide5UK
 ];
