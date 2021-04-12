@@ -11,8 +11,8 @@ let vaccine_first_dosage = 0;
 let vaccine_second_dosage = 0;
 let percentage_vaccinated_first_dose = 0;
 let percentage_vaccinated_second_dose = 0;
-let percentage_vaccinea_recives_first_dose = 0;
-let percentage_vaccinea_recives_second_dose = 0;
+let percentage_vaccines_recives_first_dose = 0;
+let percentage_vaccines_recives_second_dose = 0;
 
 susCovidLatestDataWithVaccinations.forEach(element => {
     data.push(element)
@@ -38,8 +38,8 @@ export const Slide6 = ({active}) => {
         vaccine_second_dosage = dataState.vaccine_second_dosage;
         percentage_vaccinated_first_dose = ((vaccine_first_dosage/population)*100).toFixed(2)
         percentage_vaccinated_second_dose = ((vaccine_second_dosage/population)*100).toFixed(2)
-        percentage_vaccinea_recives_first_dose = ((vaccine_first_dosage/total_vaccines_received)*100).toFixed(2)
-        percentage_vaccinea_recives_second_dose = ((vaccine_second_dosage/total_vaccines_received)*100).toFixed(2)
+        percentage_vaccines_recives_first_dose = ((vaccine_first_dosage/total_vaccines_received)*100).toFixed(2)
+        percentage_vaccines_recives_second_dose = ((vaccine_second_dosage/total_vaccines_received)*100).toFixed(2)
 
     }
 
@@ -77,11 +77,11 @@ export const Slide6 = ({active}) => {
                         <p>População Total: {population}</p>
                         <p>Total de Vacinas Recebidas: {total_vaccines_received}</p>
                         <p>Total de Vacinados (Primeira Dose): {vaccine_first_dosage}</p>
-                        <p><b>Vacinas destinadas para a Primeira Dose: {percentage_vaccinea_recives_first_dose}%</b></p>
+                        <p><b>Vacinas destinadas para a Primeira Dose: {percentage_vaccines_recives_first_dose}%</b></p>
                         <p><b>População Vacinada (Primeira Dose): {percentage_vaccinated_first_dose}%</b></p>
                         <p>Total de Vacinados (Segunda Dose): {vaccine_second_dosage}</p>
                         <p><b>População Vacinada (Segunda Dose): {percentage_vaccinated_second_dose}%</b></p>
-                        <p><b>Vacinas destinadas para a Segunda Dose: {percentage_vaccinea_recives_second_dose}%</b></p>
+                        <p><b>Vacinas destinadas para a Segunda Dose: {percentage_vaccines_recives_second_dose}%</b></p>
                     </div>
                 </div>
             </section>
