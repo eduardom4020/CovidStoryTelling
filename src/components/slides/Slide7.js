@@ -6,6 +6,8 @@ import reductio from 'reductio';
 import { 
     RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST_NEW_ZEALAND, 
     RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST_BRAZIL,
+    RESOURCE_NAME_VACCINATIONS,
+    RESOURCE_NAME_VACCINATIONS_UK,
     POPULATION_BRAZIL, 
     POPULATION_UK 
 } from '../../constants';
@@ -17,9 +19,12 @@ export const Slide7 = ({active}) => {
     const brazilTimeDimension = useDimension(RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST_BRAZIL, 'date');
     const unitedKingdomTimeDimension = useDimension(RESOURCE_NAME_JHU_FULL_DATA_WITH_FORECAST_NEW_ZEALAND, 'date');
 
+    const brazilVaccitationTimeDimension = useDimension(RESOURCE_NAME_VACCINATIONS, 'date');
+    const unitedKingdomVaccitationTimeDimension = useDimension(RESOURCE_NAME_VACCINATIONS_UK, 'date');
+    
     useEffect(() => {
         
-        if(barchartRef.current && brazilTimeDimension && unitedKingdomTimeDimension) {
+        if(barchartRef.current && brazilTimeDimension && unitedKingdomTimeDimension && brazilVaccitationTimeDimension && unitedKingdomVaccitationTimeDimension) {
             const chartDOM = barchartRef.current;
             const { width, height } = chartDOM.parentNode.getBoundingClientRect();
 
@@ -46,34 +51,60 @@ export const Slide7 = ({active}) => {
                     dc.lineChart(chart)
                         .dimension(brazilTimeDimension)
                         .colors('red')
-                        .group(groupBrazil, "Brazil"),
+                        .group(groupBrazil, "Brasil"),
                     dc.lineChart(chart)
                         .dimension(unitedKingdomTimeDimension)
                         .colors('blue')
-                        .group(groupUnitedKingdom, "United Kingdom")
+                        .group(groupUnitedKingdom, "Inglaterra")
                     ]);
 
             dc.renderAll('slide7');
 
-            window.chartDOM = chartDOM;
+            const selection = chartDOM.getElementsByTagName('svg')[0].getElementsByClassName('brush')[0];
+            
+            const reducerBr = reductio().min(d => d.people_vaccinated && +d.people_vaccinated >= 0);
+            const vGroupBr = brazilVaccitationTimeDimension.group();
+            reducerBr(vGroupBr);
 
-            const redBox = d3.select(chartDOM.getElementsByTagName('svg')[0])
+            const vDateBr = vGroupBr.order(d => d.min).top(1)[0].key;
+
+            const reducerUk = reductio().min(d => d.people_vaccinated && +d.people_vaccinated >= 0);
+            const vGroupUk = unitedKingdomVaccitationTimeDimension.group();
+            reducerUk(vGroupUk);
+
+            const vDateUk = vGroupUk.order(d => d.min).top(1)[0].key;
+
+            const minDate = [vDateBr, vDateUk].reduce((a, b) => a.valueOf < b.valueOf ? a : b, new Date());
+
+            const vaccineBox = d3.select(selection)
                 .append("rect")
-                .attr("x", scale(new Date('2021-01-01')))
-                .attr("y", 0)
-                .attr("width", scale.domain()[1] - scale(new Date('2021-01-01')))
-                // .attr("width", 20)
-                .attr("height", height - 20)
-                .attr("fill", "red")
+                .attr("x", scale(minDate))
+                .attr("y", 50)
+                .attr("width", scale.domain()[1] - scale(minDate))
+                .attr("height", height - 80)
+                .attr("fill", "green")
                 .attr("opacity", 0.4);
         }
 
-    }, [brazilTimeDimension, unitedKingdomTimeDimension, barchartRef.current])
+    }, [brazilTimeDimension, unitedKingdomTimeDimension, brazilVaccitationTimeDimension, unitedKingdomVaccitationTimeDimension, barchartRef.current])
 
     return (
-        <div style={{height: '100%', margin: '5rem', marginTop: '9rem'}}>
-            <h2>Comparativo de casos entre Brazil e Reino Unido, com previsão para um mês a frente.</h2>
-            <div style={{height: '25rem'}} ref={barchartRef}/>
+        <div style={{height: '100%', margin: '5rem', marginTop: '9rem', marginBottom: '18rem'}}>
+            <h2>Comparativo das mortes entre Brazil e Reino Unido, com previsão para um mês a frente.</h2>
+            
+            <p>
+                Fazendo uma previsão do próximo mês, podemos ver que a tendência do Brasil é
+                aumentar os casos. Porém, isso provavelmente se deve a este momento de subida.
+                <br/>
+                Uma conclusão preeliminar que pode ser feita com esta análise, seguindo o exemplo 
+                da Inglaterra que já zerou o número de mortes, podemos ver que quando a vacinação 
+                foi iniciada (quadrado verde) a quantidade de casos aumentou. Isso provavelmente 
+                se deve pela falsa impressão de que com a primeira dose, já estão protegidas da 
+                doença, com isso algumas normas de isolamento podem ser desrespeitadas. Segundo 
+                estudos, a Coronavac só garante sua proteção a partir de 15 dias após a segunda dose.
+            </p>
+
+            <div style={{height: '15rem'}} ref={barchartRef}/>
         </div>
     );
 }
